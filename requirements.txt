@@ -1,0 +1,4 @@
+pytorchlightning
+torch 
+torchvision
+torchaudio
