@@ -6,7 +6,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - $HOME/.Xauthority:/home/dev/.Xauthority
-      - ./:/home/dev/working
+      - $PWD/:/home/dev/working
       # - /dev:/dev
       # - /sys:/sys
       # - /proc:/proc
