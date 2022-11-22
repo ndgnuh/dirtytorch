@@ -5,6 +5,61 @@ from os import path
 import os
 
 
+class Learner(pl.LightningModule):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.save_hyperparameters()
+
+    def training_step(self, batch):
+        output = self(batch)
+        return output['loss']
+
+    def training_epoch_end(self, outputs):
+        losses = [output['loss'].detach().item() for output in outputs]
+        mean_loss = sum(losses) / len(losses)
+        self.log("Train loss", mean_loss)
+
+    def validation_step(self, batch, idx):
+        output = self(batch)
+        scores = output.get('scores', tuple())
+        if not isinstance(scores, tuple):
+            scores = (scores,)
+        return scores
+
+    def validation_epoch_end(self, outputs):
+        n = len(outputs)
+        names = self.get_score_names()
+        scores = dict()
+
+        # Calculate total score
+        for output in outputs:
+            for (name, score) in zip(names, output):
+                scores[name] = scores.get(name, 0) + score
+
+        # Divide by batch
+        for (name, score) in scores.items():
+            scores[name] = score.detach().item() / n
+
+        # Best scores
+        best_scores = getattr(self, "best_scores", dict())
+        for name, score in scores.items():
+            best_name = f"Best {name}"
+            best = best_scores.get(best_name, 0)
+            if score > best:
+                best_scores[best_name] = score
+        self.best_scores = best_scores
+
+        # log
+        self.log_dict(scores)
+        self.log_dict(best_scores)
+
+    def get_score_names(self):
+        return tuple(f"Score {i:02d}" for i in range(10))
+
+    def configure_optimizers(self):
+        return torch.optim.AdamW(self.parameters(), lr=self.learning_rate)
+
+
 class Trainable(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         output = self(batch)
