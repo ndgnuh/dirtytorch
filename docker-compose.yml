@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  dev_env:
+    image: ndgnuh/torch-dev-env
+    container_name: torch-dev-env
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/home/dev/.Xauthority
+      - ./:/home/dev/working
+      # - /dev:/dev
+      # - /sys:/sys
+      # - /proc:/proc
+      # - /dev/video0:/dev/video0
+    devices:
+      - /dev/video0:/dev/video0
+        
+    tty: true
+    stdin_open: true
+    environment:
+      - DISPLAY=$DISPLAY
+    network_mode: host
+# docker run -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -h $HOSTNAME -v $HOME/.Xauthority:/home/lyonn/.Xauthority gui
