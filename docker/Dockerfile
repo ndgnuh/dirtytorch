@@ -1,12 +1,25 @@
-FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
+# FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
+FROM python:3.9-slim-bullseye
 
+# ENV
+ENV TERM=xterm-256color
+
+# Install python
 RUN apt-get update
 RUN apt-get install -y apt-utils
-RUN apt-get install -y neovim tmux htop tree build-essential
-RUN apt-get install -y python3 python3-opencv
-RUN apt-get install -y python3-pip python-is-python3
-RUN apt-get install -y sudo ffmpeg
+RUN apt-get install -y python3 python3-pip
+RUN apt-get install -y python-is-python3
+
+# Heavy deps get installed first
+RUN pip install -U pip
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+
+RUN pip cache purge
+
+# Extra packages
+RUN apt-get install -y sudo ffmpeg python3-opencv
 RUN apt-get install -y thunar v4l2loopback-dkms vlc file
+RUN apt-get install -y neovim tmux htop tree build-essential
 
 # Create user
 RUN useradd -u 1000 -m dev
@@ -20,17 +33,14 @@ WORKDIR /home/dev/
 # Heavy deps get installed first
 RUN pip install -U pip
 RUN pip install pyclean
-RUN pip install torch torchvision torchaudio
 # COPY requirements.txt .
 # RUN pip install -r requirements.txt
+RUN pip cache purge
 
 # PATH
 COPY .bashrc /home/dev/
 
 RUN mkdir /home/dev/working
 WORKDIR /home/dev/working
-
-# ENV
-ENV TERM=xterm-256color
 
 CMD ["bash"]
