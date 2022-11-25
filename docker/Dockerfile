@@ -34,10 +34,8 @@ WORKDIR /home/dev/
 # Install deps
 # Heavy deps get installed first
 RUN pip install -U pip
-RUN pip install pyclean
-RUN pip install pytorch_lightning
-# COPY requirements.txt .
-# RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install -r requirements.txt -U
 RUN pip cache purge
 
 # PATH

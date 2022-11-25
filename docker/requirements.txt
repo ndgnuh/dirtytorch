@@ -1,0 +1,10 @@
+jupyter
+jupyter_contrib_nbextensions
+ipywidgets
+pytorch_lightning
+tqdm
+pandas
+numpy
+toolz
+lenses
+opencv-python
