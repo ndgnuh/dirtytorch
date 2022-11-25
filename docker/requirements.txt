@@ -1,3 +1,6 @@
+onnxruntime-gpu
+thefuzz[speedup]
+pyclean
 jupyter
 jupyter_contrib_nbextensions
 ipywidgets
