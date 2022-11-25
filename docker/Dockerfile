@@ -20,6 +20,8 @@ RUN pip cache purge
 RUN apt-get install -y sudo ffmpeg python3-opencv
 RUN apt-get install -y thunar v4l2loopback-dkms vlc file
 RUN apt-get install -y neovim tmux htop tree build-essential
+RUN apt-get install -y git feh
+RUN apt-get install -y curl wget aria2
 
 # Create user
 RUN useradd -u 1000 -m dev
@@ -33,6 +35,7 @@ WORKDIR /home/dev/
 # Heavy deps get installed first
 RUN pip install -U pip
 RUN pip install pyclean
+RUN pip install pytorch_lightning
 # COPY requirements.txt .
 # RUN pip install -r requirements.txt
 RUN pip cache purge
