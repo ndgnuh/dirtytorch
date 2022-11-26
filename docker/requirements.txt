@@ -7,7 +7,9 @@ ipywidgets
 pytorch_lightning
 tqdm
 pandas
+scipy
 numpy
 toolz
 lenses
 opencv-python
+mlflow
