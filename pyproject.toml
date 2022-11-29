@@ -13,7 +13,7 @@ dependencies = [
 
 [tool.setuptools]
 packages = [
-	"dirtytorch"
-	"dirtytorch.train_utils"
+	"dirtytorch",
+	"dirtytorch.train_utils",
 	"dirtytorch.tripletstuffs"
 ]
