@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dirtytorch"
+version = "1.0.0"
+dependencies = [
+    "numpy",
+    "opencv-python",
+	"Pillow"
+]
+
+[tool.setuptools]
+packages = [
+	"dirtytorch"
+	"dirtytorch.train_utils"
+	"dirtytorch.tripletstuffs"
+]
