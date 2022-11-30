@@ -13,5 +13,10 @@ dependencies = [
 
 [tool.setuptools]
 packages = [
-	"dirtytorch"
+	"dirtytorch",
+	"dirtytorch.scripts"
 ]
+
+[project.scripts]
+dirty="dirtytorch.__main__:main"
+enter-dev="dirtytorch.scripts.enterdev:main"
