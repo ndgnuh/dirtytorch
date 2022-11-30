@@ -20,7 +20,7 @@ mount_directories = [
     (f"{HOME}/.cache/", "/home/dev/.cache"),
 ]
 
-if HOME != "dev":
+if USER != "dev":
     mount_directories.append((f"{HOME}", None))
 
 default_args = [
