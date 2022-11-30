@@ -20,6 +20,9 @@ mount_directories = [
     (f"{HOME}/.cache/", "/home/dev/.cache"),
 ]
 
+if HOME != "dev":
+    mount_directories.append((f"{HOME}", None))
+
 default_args = [
     "-v", f"{PWD}:/home/dev/working",
     "--rm", "-it",
