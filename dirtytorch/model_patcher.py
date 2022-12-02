@@ -1,6 +1,12 @@
 import inspect
 from lenses import bind
 
+
+def get_num_args(f):
+    sig = inspect.signature(f)
+    return len(sig.parameters)
+
+
 def parse_extra_repr(s):
     def take(*args, **kw):
         return args, kw
@@ -59,9 +65,24 @@ def set_module(net, path, module):
     return lens_.set(module)
 
 
-def patch_net(net, patch, condition):
+def patch_net(net, patch, condition, returns_info=False):
+    num_args_condition = get_num_args(condition)
+    num_args_patch = get_num_args(patch)
+    index = 0
+
+    if returns_info:
+        info = []
+
     for name, module in net.named_modules():
-        if condition(module, name):
-            patched = patch(module, name)
+        args = (module, name, index)
+        if condition(*args[:num_args_condition]):
+            patched = patch(*args[:num_args_patch])
             net = set_module(net, name, patched)
-    return net
+            if returns_info and patched != module:
+                info.append((name, module, patched, index))
+            index += 1
+
+    if returns_info:
+        return net, info
+    else:
+        return net
