@@ -25,6 +25,11 @@ def get_extra_repr(s):
     return eval(f"take({s})")
 
 
+def patch_equivalent(ref, Layer):
+    args, kwargs = parse_extra_repr(ref.extra_repr())
+    return Layer(*args, **kwargs)
+
+
 def patch_arg(ref, *moda, **modk):
     Layer = type(ref)
 
