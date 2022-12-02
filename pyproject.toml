@@ -6,15 +6,17 @@ build-backend = "setuptools.build_meta"
 name = "dirtytorch"
 version = "1.0.0"
 dependencies = [
-    "numpy",
-    "opencv-python",
-	"Pillow"
+	"numpy",
+   	"opencv-python",
+	"Pillow",
+	"lenses",
 ]
 
 [tool.setuptools]
 packages = [
 	"dirtytorch",
-	"dirtytorch.scripts"
+	"dirtytorch.scripts",
+	"dirtytorch.model_patcher",
 ]
 
 [project.scripts]
