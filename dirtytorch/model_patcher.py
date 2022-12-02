@@ -25,11 +25,6 @@ def get_extra_repr(s):
     return eval(f"take({s})")
 
 
-def patch_equivalent(ref, Layer):
-    args, kwargs = parse_extra_repr(ref.extra_repr())
-    return Layer(*args, **kwargs)
-
-
 def patch_arg(ref, *moda, **modk):
     Layer = type(ref)
 
@@ -91,3 +86,18 @@ def patch_net(net, patch, condition, returns_info=False):
         return net, info
     else:
         return net
+
+
+def create_equivalent(ref, Layer):
+    args, kwargs = parse_extra_repr(ref.extra_repr())
+    return Layer(*args, **kwargs)
+
+
+def replace_layers(net, src_Layer, dst_Layer):
+    def condition(module):
+        return isinstance(module, src_Layer)
+
+    def patch(module):
+        return create_equivalent(module, dst_Layer)
+
+    return patch_net(net, condition, patch)
