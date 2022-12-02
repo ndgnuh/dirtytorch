@@ -16,7 +16,7 @@ dependencies = [
 packages = [
 	"dirtytorch",
 	"dirtytorch.scripts",
-	"dirtytorch.model_patcher",
+	# "dirtytorch.model_patcher", not needed
 ]
 
 [project.scripts]
