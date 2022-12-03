@@ -4,7 +4,6 @@ pyclean
 jupyter
 jupyter_contrib_nbextensions
 ipywidgets
-pytorch_lightning
 tqdm
 pandas
 scipy
@@ -13,3 +12,9 @@ toolz
 lenses
 opencv-python
 mlflow
+
+# Torch packages
+torchtext
+torch-summary
+pytorch_lightning
+torchmetrics
