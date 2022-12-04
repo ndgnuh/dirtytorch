@@ -62,6 +62,13 @@
     "file": "nn/reshape.py",
     "name": "nn.reshape"
   },
+  "utils.find": {
+    "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
+    "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
+    "depends": [],
+    "file": "utils/find.py",
+    "name": "utils.find"
+  },
   "utils.functable": {
     "short_desc": "Nice Dict[K, Callable] wrapper",
     "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
