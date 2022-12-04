@@ -90,7 +90,8 @@ helps = dict(
 def main():
     parser = ArgumentParser()
     # parser.add_argument("action", choices=allowed_actions)
-    subparsers = parser.add_subparsers(dest="action", help="Action")
+    subparsers = parser.add_subparsers(
+        dest="action", help="Action", required=True)
     for action in allowed_actions:
         subparser = subparsers.add_parser(action, help=helps[action])
         add_subparser[action](subparser)
@@ -100,4 +101,5 @@ def main():
     dispatch[action](args)
 
 
-main()
+if __name__ == "__main__":
+    main()
