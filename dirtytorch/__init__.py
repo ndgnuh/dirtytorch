@@ -18,7 +18,7 @@ def list_snippets():
 
 
 def get_snippet(name, output_file: Optional[Union[bool, str]] = None):
-    file = path.join(thisdir, list_snippets()[name].file)
+    file = path.join(thisdir, list_snippets()[name]["file"])
 
     with open(file, encoding="utf-8") as f:
         content = f.read()
