@@ -1,4 +1,5 @@
 from pytorch_lightning.callbacks import Callback
+from typing import Callable
 from functools import wraps
 import torch
 
@@ -33,8 +34,7 @@ class GlobalStepLRScheduler(Callback):
 
 class MetricMonitorCallback(Callback):
     def __init__(self,
-                 metric
-                 str,
+                 metric: str,
                  mode: str,
                  callback: Callable,
                  on: str, model=None):
