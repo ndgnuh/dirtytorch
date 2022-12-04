@@ -74,14 +74,8 @@ def update_action(args):
     run(["pip", "install", origin, "--force"])
 
 
-def dump_single(name, output):
-    if output is not None:
-        d = path.dirname(output)
-        try:
-            makedirs(d, exist_ok=True)
-        except Exception:
-            pass
-    snip = get_snippet(name, output)
+def dump_single(name, output, **kwargs):
+    snip = get_snippet(name, output, **kwargs)
     if output is None:
         print(snip)
     else:
@@ -94,7 +88,16 @@ def dump_action(args):
         with open(args.name) as f:
             snips = json.load(f)
             for name, output in snips.items():
-                dump_single(name, output)
+                if output is not None:
+                    d = path.dirname(output)
+                    try:
+                        makedirs(d, exist_ok=True)
+                    except Exception:
+                        pass
+                with open(output, "w") as f:
+                    f.write("")
+            for name, output in snips.items():
+                dump_single(name, output, append=True)
     else:
         dump_single(args.name, args.output)
 

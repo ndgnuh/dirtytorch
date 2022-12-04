@@ -17,7 +17,8 @@ def list_snippets():
         return snips
 
 
-def get_snippet(name, output_file: Optional[Union[bool, str]] = None):
+def get_snippet(name, output_file: Optional[Union[bool, str]] = None,
+                append: bool = False):
     file = path.join(thisdir, list_snippets()[name]["file"])
 
     with open(file, encoding="utf-8") as f:
@@ -31,6 +32,7 @@ def get_snippet(name, output_file: Optional[Union[bool, str]] = None):
         output_file = path.basename(file)
 
     if output_file is not None:
-        with open(output_file, "w", encoding="utf-8") as f:
+        mode = "a" if append else "w"
+        with open(output_file, mode, encoding="utf-8") as f:
             f.write(content)
     return content
