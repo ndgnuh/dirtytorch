@@ -69,6 +69,13 @@
     "file": "utils/find.py",
     "name": "utils.find"
   },
+  "utils.dict": {
+    "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/dict.py",
+    "name": "utils.dict"
+  },
   "utils.functable": {
     "short_desc": "Nice Dict[K, Callable] wrapper",
     "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
