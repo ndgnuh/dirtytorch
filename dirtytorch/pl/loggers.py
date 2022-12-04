@@ -1,3 +1,9 @@
+# short_desc: pytorch lightning customer loggers
+#
+# Usage is the same as offical ones
+# This module's main functions are:
+# - ConsoleLogger
+# - MLFlowLogger (returns MLFlowLogger and set other settings for mlflow)
 from pytorch_lightning import loggers
 from pytorch_lightning.loggers.logger import Logger, rank_zero_experiment
 from pytorch_lightning.utilities import rank_zero_only

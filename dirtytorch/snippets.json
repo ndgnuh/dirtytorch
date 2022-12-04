@@ -27,13 +27,6 @@
     "file": "tripletstuffs.py",
     "name": "tripletstuffs"
   },
-  "model_patcher": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "model_patcher.py",
-    "name": "model_patcher"
-  },
   "train_utils": {
     "short_desc": "No short description provided",
     "description": "No description provided",
@@ -41,16 +34,9 @@
     "file": "train_utils.py",
     "name": "train_utils"
   },
-  "functable": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "functable.py",
-    "name": "functable"
-  },
   "pl.loggers": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
+    "short_desc": "pytorch lightning customer loggers",
+    "description": "Usage is the same as offical ones\nThis module's main functions are:\n- ConsoleLogger\n- MLFlowLogger (returns MLFlowLogger and set other settings for mlflow)",
     "depends": [],
     "file": "pl/loggers.py",
     "name": "pl.loggers"
@@ -62,12 +48,26 @@
     "file": "pl/callbacks.py",
     "name": "pl.callbacks"
   },
+  "nn.patcher": {
+    "short_desc": "patching pytorch models",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/patcher.py",
+    "name": "nn.patcher"
+  },
   "nn.reshape": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
     "file": "nn/reshape.py",
     "name": "nn.reshape"
+  },
+  "utils.functable": {
+    "short_desc": "Nice Dict[K, Callable] wrapper",
+    "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
+    "depends": [],
+    "file": "utils/functable.py",
+    "name": "utils.functable"
   },
   "scripts.split_image_folder": {
     "short_desc": "No short description provided",

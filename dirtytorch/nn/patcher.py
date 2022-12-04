@@ -1,3 +1,4 @@
+# short_desc: patching pytorch models
 import inspect
 from lenses import bind
 

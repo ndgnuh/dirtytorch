@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from subprocess import run
-from .functable import Functable
+from .utils.functable import Functable
 from . import list_snippets, get_snippet
 from os import makedirs, path
 

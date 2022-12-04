@@ -1,3 +1,11 @@
+# short_desc: Nice Dict[K, Callable] wrapper
+#
+# Sample usage:
+#   dispatch = Functable()
+#   dispatch.register("action1", action1)
+#   @dispatch.register("action2")
+#   def action2(...):
+#       ...
 from typing import Callable, Optional
 from functools import wraps
 
