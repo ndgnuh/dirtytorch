@@ -4,6 +4,8 @@ from .functable import Functable
 from . import snippets, get_snippet
 from os import makedirs, path
 
+import json
+
 allowed_actions = ["list", "dump", "update"]
 
 add_subparser = Functable()
@@ -19,6 +21,9 @@ def dump_parser(subparsers):
 def dump_parser(parser):
     parser.add_argument("name",
                         help="Snippet name")
+    parser.add_argument("--from-file", "-f", dest="from_file",
+                        help="Dump from file, default=false",
+                        action="store_true", default=False)
     parser.add_argument("--output", "-o", dest="output",
                         help="Write snippet to output file")
     return parser
@@ -69,19 +74,29 @@ def update_action(args):
     run(["pip", "install", origin, "--force"])
 
 
-@dispatch("dump")
-def dump_action(args):
-    if args.output is not None:
-        d = path.dirname(args.output)
+def dump_single(name, output):
+    if output is not None:
+        d = path.dirname(output)
         try:
             makedirs(d, exist_ok=True)
         except Exception:
             pass
-    snip = get_snippet(args.name, args.output)
-    if args.output is None:
+    snip = get_snippet(name, output)
+    if output is None:
         print(snip)
     else:
-        print(f"Snippet written to {args.output}")
+        print(f"Snippet {name} written to {output}")
+
+
+@dispatch("dump")
+def dump_action(args):
+    if args.from_file:
+        with open(args.name) as f:
+            snips = json.load(f)
+            for name, output in snips:
+                dump_single(name, output)
+    else:
+        dump_single(args.name, args.output)
 
 
 helps = dict(

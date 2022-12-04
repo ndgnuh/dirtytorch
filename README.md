@@ -19,6 +19,19 @@ dirty dump pl-loggers
 dirty dump -o /tmp/loggers.py pl-loggers
 ```
 
+Dump snippets from given config
+```bash
+dirty dump -f dirty.json
+```
+
+where `dirty.json` is:
+```json
+[
+	["pl-loggers", "src/utils/loggers.py"],
+	["pl-callbacks", "src/utils/loggers2.py"]
+]
+```
+
 Update `dirtytorch`
 ```bash
 dirty update
