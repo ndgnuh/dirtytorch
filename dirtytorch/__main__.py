@@ -72,7 +72,11 @@ def update_action(args):
 @dispatch("dump")
 def dump_action(args):
     if args.output is not None:
-        makedirs(path.dirname(args.output), exist_ok=True)
+        d = path.dirname(args.output)
+        try:
+            makedirs(d, exist_ok=True)
+        except Exception:
+            pass
     snip = get_snippet(args.name, args.output)
     if args.output is None:
         print(snip)
