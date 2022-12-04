@@ -6,7 +6,7 @@ from os import path
 from fnmatch import fnmatch, fnmatchcase
 
 
-def find(root, name="*", type=None, walk=True, cases=True):
+def find(root, name="*", type=None, walk=True, cases=True, sink=list):
     matcher = fnmatchcase if cases else fnmatch
     def type_matcher(x): return True
     if type == "d":
@@ -33,4 +33,6 @@ def find(root, name="*", type=None, walk=True, cases=True):
     else:
         files = (path.join(root, file) for file in os.listdir(root))
     files = filter(condition, files)
-    return set(files)
+    if sink is not None:
+        files = sink(files)
+    return files
