@@ -32,6 +32,15 @@ def ctc_greedy_decode(logits, blank_id, vocab=None):
     return outputs
 
 
+def read_vocab_file(file: str) -> str:
+    with open(file) as f:
+        vocab = f.read()
+        vocab = vocab.strip("\r\n\t")
+        assert len(set(vocab)) == len(
+            list(vocab)), "Duplicate character in vocab"
+        return vocab
+
+
 class CTCClassifier:
     def __init__(self,
                  onnx_file: str,
