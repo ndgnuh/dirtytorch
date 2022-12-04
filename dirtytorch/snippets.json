@@ -42,7 +42,7 @@
     "name": "pl.loggers"
   },
   "pl.callbacks": {
-    "short_desc": "No short description provided",
+    "short_desc": "Custom lightning callbacks",
     "description": "No description provided",
     "depends": [],
     "file": "pl/callbacks.py",

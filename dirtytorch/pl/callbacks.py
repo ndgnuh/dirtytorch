@@ -1,7 +1,48 @@
+# short_desc: Custom lightning callbacks
 from pytorch_lightning.callbacks import Callback
 from typing import Callable
 from functools import wraps
 import torch
+
+
+class BestWatcher(Callback):
+    def __init__(self,
+                 metric_name: str,
+                 mode: str = "max",
+                 eq: bool = True):
+        super().__init__()
+        assert mode in ["min", "max"]
+        self.metric_name = metric_name
+        self.best_name = f"best_{metric_name}"
+        self.mode = mode
+        self.eq = eq
+
+        if mode == "min":
+            self.current_best = torch.inf
+        else:
+            self.current_best = -torch.inf
+
+    def on_validation_epoch_start(self, *a, **kw):
+        self.metrics = []
+
+    def on_validation_batch_end(self, _, _, outputs, _, _, _):
+        self.metrics.append(outputs)
+
+    def on_validation_epoch_end(self, _, pl_module):
+        n = len(self.metrics)
+        if n == 0:
+            return
+        mean_metric = sum(self.metrics) / n
+        if self.mode == "min":
+            surpass = mean_metric < self.current_best
+        else:
+            surpass = mean_metric > self.current_best
+        if self.eq:
+            surpass = surpass or mean_metric == self.current_best
+        if surpass:
+            self.current_best = mean_metric
+            pl_module.log(self.best_name, mean_metric)
+        pl_module.log(self.metric_name, mean_metric)
 
 
 class GlobalStepLRScheduler(Callback):

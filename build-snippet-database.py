@@ -1,3 +1,4 @@
+#!/bin/env python3
 import os
 import re
 import json
@@ -28,4 +29,4 @@ for (root, _, files) in os.walk(thisdir):
 
 with open(output_file, "w", encoding="utf-8") as f:
     json.dump(specs, f, ensure_ascii=False, indent=2)
-pprint(specs)
+    print(f"Done, database written to {path.basename(output_file)}")
