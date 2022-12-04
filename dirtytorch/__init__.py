@@ -30,7 +30,13 @@ snippets = {
         file="model_patcher.py",
         description="""\
         Patching pytorch modules
-        """.strip())
+        """.strip()),
+    "pl-callbacks": Snippet(
+        file="pl/callbacks.py", description="Lightning callbacks"
+    ),
+    "pl-loggers": Snippet(
+        file="pl/loggers.py", description="Lightning loggers"
+    )
 }
 
 
