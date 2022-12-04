@@ -33,7 +33,7 @@ class MetricWatcher(Callback):
     def on_validation_epoch_start(self, *a, **kw):
         self.metrics = []
 
-    def on_validation_batch_end(self, _, _, outputs, _, _, _):
+    def on_validation_batch_end(self, _, plmodule, outputs, *a, **k):
         if callable(self.getter):
             value = self.getter(outputs)
         elif self.getter is not None:
@@ -45,10 +45,10 @@ class MetricWatcher(Callback):
         if not self.log_step:
             return
 
-        self.log(self.step_name, value)
         if self.check_surpass(value, self.current_best_step):
             self.current_best_step = value
-            self.log(self.best_step_name, value)
+        plmodule.log(self.step_name, value)
+        plmodule.log(self.best_step_name, value)
 
     def check_surpass(self, value, current_best):
         if self.mode == "min":
@@ -59,15 +59,15 @@ class MetricWatcher(Callback):
             surpass = surpass or value == current_best
         return surpass
 
-    def on_validation_epoch_end(self, _, pl_module):
+    def on_validation_epoch_end(self, _, plmodule):
         n = len(self.metrics)
         if n == 0:
             return
         mean_metric = sum(self.metrics) / n
         if self.check_surpass(mean_metric, self.current_best):
             self.current_best = mean_metric
-            pl_module.log(self.best_name, mean_metric)
-        pl_module.log(self.metric_name, mean_metric)
+        plmodule.log(self.best_name, mean_metric)
+        plmodule.log(self.metric_name, mean_metric)
 
 
 class GlobalStepLRScheduler(Callback):
