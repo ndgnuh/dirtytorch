@@ -5,22 +5,12 @@ import torch
 
 
 class GlobalStepLRScheduler(Callback):
-    def __init__(self, every: int = None, model=None, trainer=None):
+    def __init__(self, every: int = None):
         super().__init__()
         self.every = every
-        self.model = model
-        self.trainer = trainer
 
-    def on_before_optimizer_step(self, *args, **kwargs):
-        if self.trainer is not None:
-            global_step = self.trainer.global_step
-            model = self.trainer.model
-        elif self.model is not None:
-            global_step = self.model.global_step
-            model = self.model
-        else:
-            raise ValueError(
-                "Bind this callback with a model or a trainer first")
+    def on_before_optimizer_step(self, trainer, *args, **kwargs):
+        model = trainer.model
 
         if global_step != 0 and global_step % self.every == 0:
             lr_schedulers = model.lr_schedulers()
