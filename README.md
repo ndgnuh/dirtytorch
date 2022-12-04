@@ -26,10 +26,10 @@ dirty dump -f dirty.json
 
 where `dirty.json` is:
 ```json
-[
-	["pl-loggers", "src/utils/loggers.py"],
-	["pl-callbacks", "src/utils/loggers2.py"]
-]
+{
+	"pl-loggers": "src/utils/loggers.py",
+	"pl-callbacks": "src/utils/callbacks.py"
+}
 ```
 
 Update `dirtytorch`

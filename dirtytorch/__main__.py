@@ -93,7 +93,7 @@ def dump_action(args):
     if args.from_file:
         with open(args.name) as f:
             snips = json.load(f)
-            for name, output in snips:
+            for name, output in snips.items():
                 dump_single(name, output)
     else:
         dump_single(args.name, args.output)
