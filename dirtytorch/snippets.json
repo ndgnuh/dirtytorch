@@ -84,7 +84,7 @@
     "name": "scripts.enterdev"
   },
   "onnx.ctc_classifier": {
-    "short_desc": "No short description provided",
+    "short_desc": "easy CTCClassifier with onnx runtime",
     "description": "No description provided",
     "depends": [],
     "file": "onnx/ctc_classifier.py",
