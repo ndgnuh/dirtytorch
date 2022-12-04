@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from subprocess import run
 from .functable import Functable
-from . import snippets, get_snippet
+from . import list_snippets, get_snippet
 from os import makedirs, path
 
 import json
@@ -44,15 +44,15 @@ def list_action(args):
     # SHORT PRINT
     if not args.full:
         print("List of snippet names:")
-        for name, snippet in snippets.items():
+        for name, snippet in list_snippets().items():
             print(" " * 3 + name)
         return
 
     # LONG PRINT
     columns = [["Name", "File", "Descriptions"]]
     lengths = [len(c) for c in columns[0]]
-    for name, snippet in snippets.items():
-        columns.append([name, snippet.file, snippet.description])
+    for name, snippet in list_snippets().items():
+        columns.append([name, snippet["file"], snippet["description"]])
         lengths = [
             max(lengths[i], len(columns[-1][i]))
             for i in range(3)

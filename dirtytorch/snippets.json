@@ -1,0 +1,19 @@
+{
+	"shape-modules": {
+		"file": "nn/reshape.py",
+        "description": "Provide Reshape and Permute layer as torch.nn modules"
+	},
+	"model-patcher": {
+		"file": "model_patcher.py",
+		"description": "Patching PyTorch module"
+	},
+	"pl-callbacks": {
+		"file": "pl/callbacks.py",
+		"description": "PytorchLightning callbacks that I find helpful"
+	},
+	"pl-loggers": {
+		"file": "pl/loggers.py",
+		"description": "Customized PytorchLightning loggers"
+	}
+
+}

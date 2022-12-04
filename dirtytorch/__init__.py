@@ -2,51 +2,23 @@ from os import path
 from typing import Optional, Union
 from dataclasses import dataclass
 from pprint import pprint
-
-
-def init_mlflow_logger(*args, tracking_uri=None, **kwargs):
-    from pytorch_lightning import loggers
-    import mlflow
-    logger = loggers.MLFlowLogger(*args, **kwargs, tracking_uri=tracking_uri)
-    mlflow.set_tracking_uri(tracking_uri)
-    return logger
-
-
-@dataclass
-class Snippet:
-    file: str
-    description: str
-
+from functools import lru_cache
+import json
 
 thisdir = path.dirname(__file__)
 
-snippets = {
-    "shape-modules": Snippet(
-        file="nn/reshape.py",
-        description="""\
-        Provide Reshape and Permute layer as torch.nn modules
-        """.strip()),
-    "model-patcher": Snippet(
-        file="model_patcher.py",
-        description="""\
-        Patching pytorch modules
-        """.strip()),
-    "pl-callbacks": Snippet(
-        file="pl/callbacks.py", description="Lightning callbacks"
-    ),
-    "pl-loggers": Snippet(
-        file="pl/loggers.py", description="Lightning loggers"
-    )
-}
 
-
+@lru_cache
 def list_snippets():
-    pprint(snippets)
-    return snippets
+    with open(path.join(thisdir, "snippets.json")) as f:
+        snips = json.load(f)
+        for name, snip in snips.items():
+            snip[name] = name
+        return snips
 
 
 def get_snippet(name, output_file: Optional[Union[bool, str]] = None):
-    file = path.join(thisdir, snippets[name].file)
+    file = path.join(thisdir, list_snippets()[name].file)
 
     with open(file, encoding="utf-8") as f:
         content = f.read()
