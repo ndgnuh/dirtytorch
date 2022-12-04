@@ -32,11 +32,6 @@ def ctc_greedy_decode(logits, blank_id, vocab=None):
     return outputs
 
 
-__warn_text = """
-`vocab` is a string (expected `dict`), using `blank_id = 0`
-"""
-
-
 class CTCClassifier:
     def __init__(self,
                  onnx_file: str,
@@ -48,7 +43,7 @@ class CTCClassifier:
 
         if isinstance(vocab, str):
             if not silent:
-                print(__warn_text)
+                print("`vocab` is a string (expected `dict`), using `blank_id = 0`")
             blank_id = 0
             vocab = " " + vocab
 
