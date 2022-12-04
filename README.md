@@ -4,6 +4,28 @@ Serve as a snippet holder. This module has zero dependencies.
 
 ## Usage
 
+### Command line
+
+List snippets
+```bash
+python -m dirtytorch list
+dirty list 
+dirty list -f
+```
+
+Dump snippets
+```bash
+dirty dump pl-loggers
+dirty dump -o /tmp/loggers.py pl-loggers
+```
+
+Update `dirtytorch`
+```bash
+dirty update
+```
+
+### Programmatically
+
 ```python
 from dirtytorch import get_snippet
 
