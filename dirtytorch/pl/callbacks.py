@@ -5,21 +5,34 @@ import torch
 
 
 class GlobalStepLRScheduler(Callback):
-    def __init__(self, every: int = None):
+    def __init__(self, every: int = None, only=True):
         super().__init__()
         self.every = every
+        self.only = only
 
-    def on_before_optimizer_step(self, trainer, *args, **kwargs):
-        model = trainer.model
+    def on_before_optimizer_step(self,
+                                 trainer,
+                                 pl_module,
+                                 optimizer,
+                                 optimizer_idx):
+        global_step = trainer.global_step
 
         if global_step != 0 and global_step % self.every == 0:
-            lr_schedulers = model.lr_schedulers()
-            if lr_schedulers is None:
-                return
-            if not isinstance(lr_schedulers, list):
-                lr_schedulers = [lr_schedulers]
-            for lr_scheduler in lr_schedulers:
+            for lrs in trainer.lr_scheduler_configs:
+                lr_scheduler = lrs.scheduler
                 lr_scheduler.step()
+                for lr in lr_scheduler.get_lr():
+                    pl_module.log("learning_rate", lr)
+
+    def on_train_start(self, trainer, model):
+        # Co-exist with the original config
+        if not self.only:
+            return
+
+        # Disable calling lr scheduler from the model
+        for lrs in trainer.lr_scheduler_configs:
+            lrs.interval = 'epoch'
+            lrs.frequency = 99999999999999999
 
 
 class MetricMonitorCallback(Callback):
