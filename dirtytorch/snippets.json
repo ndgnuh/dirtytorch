@@ -18,6 +18,10 @@
 	"init-dir": {
 		"file": "init_this_dir.py",
 		"description": "Include all the packages in the current directory"
+	},
+	"onnx-ctc-classifier": {
+		"file": "onnx/ctc_classifier.py",
+		"description": "CTC inference session"
 	}
 
 }
