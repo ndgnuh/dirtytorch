@@ -14,6 +14,10 @@
 	"pl-loggers": {
 		"file": "pl/loggers.py",
 		"description": "Customized PytorchLightning loggers"
+	},
+	"init-dir": {
+		"file": "init_this_dir.py",
+		"description": "Include all the packages in the current directory"
 	}
 
 }
