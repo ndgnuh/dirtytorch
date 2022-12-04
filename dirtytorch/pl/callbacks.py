@@ -1,45 +1,70 @@
 # short_desc: Custom lightning callbacks
 from pytorch_lightning.callbacks import Callback
-from typing import Callable
+from typing import Callable, Any
 from functools import wraps
 import torch
 
 
-class BestWatcher(Callback):
+class MetricWatcher(Callback):
     def __init__(self,
                  metric_name: str,
                  mode: str = "max",
-                 eq: bool = True):
+                 eq: bool = True,
+                 getter: Any = None,
+                 log_step: bool = False):
         super().__init__()
         assert mode in ["min", "max"]
         self.metric_name = metric_name
         self.best_name = f"best_{metric_name}"
+        self.step_name = f"step_{metric_name}"
+        self.best_step_name = f"best_step_{metric_name}"
         self.mode = mode
         self.eq = eq
+        self.getter = getter
+        self.log_step = log_step
 
         if mode == "min":
             self.current_best = torch.inf
+            self.current_best_step = torch.inf
         else:
             self.current_best = -torch.inf
+            self.current_best_step = -torch.inf
 
     def on_validation_epoch_start(self, *a, **kw):
         self.metrics = []
 
     def on_validation_batch_end(self, _, _, outputs, _, _, _):
-        self.metrics.append(outputs)
+        if callable(self.getter):
+            value = self.getter(outputs)
+        elif self.getter is not None:
+            value = outputs[self.getter]
+        else:
+            value = outputs
+        self.metrics.append(value)
+
+        if not self.log_step:
+            return
+
+        self.log(self.step_name, value)
+        if self.check_surpass(value, self.current_best_step):
+            self.current_best_step = value
+            self.log(self.best_step_name, value)
+
+    def check_surpass(self, value, current_best):
+        if self.mode == "min":
+            surpass = value < current_best
+        else:
+            surpass = value > current_best
+        if self.eq:
+            surpass = surpass or value == current_best
+        return surpass
 
     def on_validation_epoch_end(self, _, pl_module):
         n = len(self.metrics)
         if n == 0:
             return
         mean_metric = sum(self.metrics) / n
-        if self.mode == "min":
-            surpass = mean_metric < self.current_best
-        else:
-            surpass = mean_metric > self.current_best
-        if self.eq:
-            surpass = surpass or mean_metric == self.current_best
-        if surpass:
+        if self.check_surpass(mean_metric, self.current_best):
             self.current_best = mean_metric
             pl_module.log(self.best_name, mean_metric)
         pl_module.log(self.metric_name, mean_metric)
@@ -76,7 +101,7 @@ class GlobalStepLRScheduler(Callback):
             lrs.frequency = 99999999999999999
 
 
-class MetricMonitorCallback(Callback):
+class MetricCallback(Callback):
     def __init__(self,
                  metric: str,
                  mode: str,
