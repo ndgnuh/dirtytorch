@@ -1,3 +1,6 @@
+from typing import List, Optional
+from pathlib import Path
+import re
 from os import path
 from typing import Optional, Union
 from dataclasses import dataclass
@@ -36,3 +39,46 @@ def get_snippet(name, output_file: Optional[Union[bool, str]] = None,
         with open(output_file, mode, encoding="utf-8") as f:
             f.write(content)
     return content
+
+
+def parse_desc(source: str):
+    lines = source.splitlines()
+    info = dict(short_desc="No short description provided",
+                description="No description provided",
+                depends=[])
+
+    descriptions = []
+    for line in lines:
+        if len(line.lstrip("#").strip()) == 0:
+            continue
+        if not line.startswith("#"):
+            break
+        match_short_desc = re.match(r"#\s*short_desc:\s*(.+)\s*", line)
+        if match_short_desc is not None:
+            info['short_desc'] = match_short_desc.group(1)
+            continue
+
+        match_depends = re.match(r"#\s*depends:\s*(.+)\s*", line)
+        if match_depends is not None:
+            depends_str = match_depends.group(1)
+            info['depends'] = re.split(r"\s*,\s*", depends_str)
+            continue
+
+        descriptions.append(line.lstrip("# ").strip())
+
+    if len(descriptions) > 0:
+        info["description"] = "\n".join(descriptions)
+    return info
+
+
+def get_snippet_spec_from_path(filepath: str):
+    filepath = Path(path.realpath(filepath))
+    basepath = Path(path.realpath(thisdir))
+
+    rpath = str(filepath.relative_to(basepath))
+    with open(filepath, 'r', encoding='utf-8') as f:
+        info = parse_desc(f.read())
+    info['file'] = rpath
+    info['name'] = path.splitext(rpath)[0].replace("/", ".")
+
+    return info

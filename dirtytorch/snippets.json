@@ -1,27 +1,93 @@
 {
-	"shape-modules": {
-		"file": "nn/reshape.py",
-        "description": "Provide Reshape and Permute layer as torch.nn modules"
-	},
-	"model-patcher": {
-		"file": "model_patcher.py",
-		"description": "Patching PyTorch module"
-	},
-	"pl-callbacks": {
-		"file": "pl/callbacks.py",
-		"description": "PytorchLightning callbacks that I find helpful"
-	},
-	"pl-loggers": {
-		"file": "pl/loggers.py",
-		"description": "Customized PytorchLightning loggers"
-	},
-	"init-dir": {
-		"file": "init_this_dir.py",
-		"description": "Include all the packages in the current directory"
-	},
-	"onnx-ctc-classifier": {
-		"file": "onnx/ctc_classifier.py",
-		"description": "CTC inference session"
-	}
-
+  "video_utils": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "video_utils.py",
+    "name": "video_utils"
+  },
+  "retinaface_utils": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "retinaface_utils.py",
+    "name": "retinaface_utils"
+  },
+  "init_this_dir": {
+    "short_desc": "No short description provided",
+    "description": "Warning\n- this module is hacky and use ugly exec code\n- this module is slow because of the exec\n- this module should should not be used in production",
+    "depends": [],
+    "file": "init_this_dir.py",
+    "name": "init_this_dir"
+  },
+  "tripletstuffs": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "tripletstuffs.py",
+    "name": "tripletstuffs"
+  },
+  "model_patcher": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "model_patcher.py",
+    "name": "model_patcher"
+  },
+  "train_utils": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "train_utils.py",
+    "name": "train_utils"
+  },
+  "functable": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "functable.py",
+    "name": "functable"
+  },
+  "pl.loggers": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "pl/loggers.py",
+    "name": "pl.loggers"
+  },
+  "pl.callbacks": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "pl/callbacks.py",
+    "name": "pl.callbacks"
+  },
+  "nn.reshape": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/reshape.py",
+    "name": "nn.reshape"
+  },
+  "scripts.split_image_folder": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "scripts/split_image_folder.py",
+    "name": "scripts.split_image_folder"
+  },
+  "scripts.enterdev": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "scripts/enterdev.py",
+    "name": "scripts.enterdev"
+  },
+  "onnx.ctc_classifier": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "onnx/ctc_classifier.py",
+    "name": "onnx.ctc_classifier"
+  }
 }

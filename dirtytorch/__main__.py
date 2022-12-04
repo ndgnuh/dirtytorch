@@ -33,7 +33,7 @@ def dump_parser(parser):
 def list_parser(parser):
     parser.add_argument("-f", "--full",
                         action="store_true",
-                        help="Show full description",
+                        help="Show description",
                         dest="full",
                         default=False)
     return parser
@@ -52,7 +52,7 @@ def list_action(args):
     columns = [["Name", "File", "Descriptions"]]
     lengths = [len(c) for c in columns[0]]
     for name, snippet in list_snippets().items():
-        columns.append([name, snippet["file"], snippet["description"]])
+        columns.append([name, snippet["file"], snippet["short_desc"]])
         lengths = [
             max(lengths[i], len(columns[-1][i]))
             for i in range(3)
