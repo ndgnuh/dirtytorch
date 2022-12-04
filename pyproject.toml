@@ -12,6 +12,7 @@ packages = [
 	"dirtytorch",
 	"dirtytorch.scripts",
 	"dirtytorch.nn",
+	"dirtytorch.onnx",
 	"dirtytorch.pl",
 	# "dirtytorch.model_patcher", not needed
 ]
