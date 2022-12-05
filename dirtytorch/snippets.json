@@ -110,5 +110,12 @@
     "depends": [],
     "file": "onnx/ctc_classifier.py",
     "name": "onnx.ctc_classifier"
+  },
+  "onnx.classifier": {
+    "short_desc": "generic classifier",
+    "description": "No description provided",
+    "depends": [],
+    "file": "onnx/classifier.py",
+    "name": "onnx.classifier"
   }
 }
