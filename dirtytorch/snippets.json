@@ -1,31 +1,10 @@
 {
-  "video_utils": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "video_utils.py",
-    "name": "video_utils"
-  },
   "retinaface_utils": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
     "file": "retinaface_utils.py",
     "name": "retinaface_utils"
-  },
-  "init_this_dir": {
-    "short_desc": "No short description provided",
-    "description": "Warning\n- this module is hacky and use ugly exec code\n- this module is slow because of the exec\n- this module should should not be used in production",
-    "depends": [],
-    "file": "init_this_dir.py",
-    "name": "init_this_dir"
-  },
-  "tripletstuffs": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "tripletstuffs.py",
-    "name": "tripletstuffs"
   },
   "train_utils": {
     "short_desc": "No short description provided",
@@ -34,54 +13,26 @@
     "file": "train_utils.py",
     "name": "train_utils"
   },
-  "pl.loggers": {
-    "short_desc": "pytorch lightning customer loggers",
-    "description": "Usage is the same as offical ones\nThis module's main functions are:\n- ConsoleLogger\n- MLFlowLogger (returns MLFlowLogger and set other settings for mlflow)",
-    "depends": [],
-    "file": "pl/loggers.py",
-    "name": "pl.loggers"
-  },
-  "pl.callbacks": {
-    "short_desc": "Custom lightning callbacks",
-    "description": "No description provided",
-    "depends": [],
-    "file": "pl/callbacks.py",
-    "name": "pl.callbacks"
-  },
-  "nn.patcher": {
-    "short_desc": "patching pytorch models",
-    "description": "No description provided",
-    "depends": [],
-    "file": "nn/patcher.py",
-    "name": "nn.patcher"
-  },
-  "nn.reshape": {
+  "tripletstuffs": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
-    "file": "nn/reshape.py",
-    "name": "nn.reshape"
+    "file": "tripletstuffs.py",
+    "name": "tripletstuffs"
   },
-  "utils.find": {
-    "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
-    "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
-    "depends": [],
-    "file": "utils/find.py",
-    "name": "utils.find"
-  },
-  "utils.dict": {
-    "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
+  "video_utils": {
+    "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
-    "file": "utils/dict.py",
-    "name": "utils.dict"
+    "file": "video_utils.py",
+    "name": "video_utils"
   },
-  "utils.functable": {
-    "short_desc": "Nice Dict[K, Callable] wrapper",
-    "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
+  "init_this_dir": {
+    "short_desc": "No short description provided",
+    "description": "Warning\n- this module is hacky and use ugly exec code\n- this module is slow because of the exec\n- this module should should not be used in production",
     "depends": [],
-    "file": "utils/functable.py",
-    "name": "utils.functable"
+    "file": "init_this_dir.py",
+    "name": "init_this_dir"
   },
   "scripts.split_image_folder": {
     "short_desc": "No short description provided",
@@ -96,6 +47,62 @@
     "depends": [],
     "file": "scripts/enterdev.py",
     "name": "scripts.enterdev"
+  },
+  "utils.with-config": {
+    "short_desc": "@with_config decorator for convoluted model configuration",
+    "description": "Usage:\n@with_config(path='module1')\nclass Module1:\ndef __init__(self, size: int):\n...\n@with_config(path='module2')\nclass Module2:\ndef __init__(self, size: int):\n...\nconfig = read_config(...)\nModule1.from_config(config)\nModule2.from_config(config)",
+    "depends": [],
+    "file": "utils/with-config.py",
+    "name": "utils.with-config"
+  },
+  "utils.dict": {
+    "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/dict.py",
+    "name": "utils.dict"
+  },
+  "utils.find": {
+    "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
+    "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
+    "depends": [],
+    "file": "utils/find.py",
+    "name": "utils.find"
+  },
+  "utils.functable": {
+    "short_desc": "Nice Dict[K, Callable] wrapper",
+    "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
+    "depends": [],
+    "file": "utils/functable.py",
+    "name": "utils.functable"
+  },
+  "nn.reshape": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/reshape.py",
+    "name": "nn.reshape"
+  },
+  "nn.patcher": {
+    "short_desc": "patching pytorch models",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/patcher.py",
+    "name": "nn.patcher"
+  },
+  "pl.loggers": {
+    "short_desc": "pytorch lightning customer loggers",
+    "description": "Usage is the same as offical ones\nThis module's main functions are:\n- ConsoleLogger\n- MLFlowLogger (returns MLFlowLogger and set other settings for mlflow)",
+    "depends": [],
+    "file": "pl/loggers.py",
+    "name": "pl.loggers"
+  },
+  "pl.callbacks": {
+    "short_desc": "Custom lightning callbacks",
+    "description": "No description provided",
+    "depends": [],
+    "file": "pl/callbacks.py",
+    "name": "pl.callbacks"
   },
   "onnx.ctc_classifier": {
     "short_desc": "easy CTCClassifier with onnx runtime",
