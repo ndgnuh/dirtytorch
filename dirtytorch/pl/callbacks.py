@@ -48,7 +48,7 @@ class MetricWatcher(Callback):
         if self.check_surpass(value, self.current_best_step):
             self.current_best_step = value
         plmodule.log(self.step_name, value)
-        plmodule.log(self.best_step_name, value)
+        plmodule.log(self.best_step_name, self.current_best_step)
 
     def check_surpass(self, value, current_best):
         if self.mode == "min":
@@ -67,7 +67,7 @@ class MetricWatcher(Callback):
         if self.check_surpass(mean_metric, self.current_best):
             self.current_best = mean_metric
         plmodule.log(self.best_name, mean_metric)
-        plmodule.log(self.metric_name, mean_metric)
+        plmodule.log(self.metric_name, self.current_best)
 
 
 class GlobalStepLRScheduler(Callback):
