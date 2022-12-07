@@ -76,6 +76,13 @@
     "file": "utils/functable.py",
     "name": "utils.functable"
   },
+  "utils.autoname": {
+    "short_desc": "auto name from configuration",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/autoname.py",
+    "name": "utils.autoname"
+  },
   "nn.reshape": {
     "short_desc": "No short description provided",
     "description": "No description provided",
