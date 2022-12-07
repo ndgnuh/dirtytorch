@@ -66,8 +66,8 @@ class MetricWatcher(Callback):
         mean_metric = sum(self.metrics) / n
         if self.check_surpass(mean_metric, self.current_best):
             self.current_best = mean_metric
-        plmodule.log(self.best_name, mean_metric)
-        plmodule.log(self.metric_name, self.current_best)
+        plmodule.log(self.metric_name, mean_metric)
+        plmodule.log(self.best_name, self.current_best)
 
 
 class GlobalStepLRScheduler(Callback):
