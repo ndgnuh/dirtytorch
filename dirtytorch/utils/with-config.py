@@ -14,21 +14,7 @@
 # Module1.from_config(config)
 # Module2.from_config(config)
 import inspect
-from dataclasses import dataclass
-from typing import Callable
-
-_function_type = type(lambda x: None)
-
-
-@dataclass
-class Function:
-    f: Callable
-
-    def from_config(cls, config):
-        pass
-
-    def __call__(self, *a, **k):
-        return self.f(*a, **k)
+from functools import wraps
 
 
 def walk_dict(d, path="", delim='.', max_depth=100):
@@ -49,20 +35,19 @@ def walk_dict(d, path="", delim='.', max_depth=100):
     return recurse(d, 0)
 
 
-def with_config(call=None, path=""):
-    if call is None:
-        return lambda call: with_config(call, path=path)
-
+def get_params(call):
     params = inspect.signature(call).parameters
+    params = {k: p.default for k, p in params.items()}
+    return params
 
-    call.init_params = dict()
-    for k, p in params.items():
-        call.init_params[k] = p.default
+
+def with_config_class(call, path):
+    params = get_params(call)
 
     def from_config(cls, config):
         config = walk_dict(config, path)
         inputs = dict()
-        for k, default in cls.init_params.items():
+        for k, default in params.items():
             if default == inspect._empty:
                 inputs[k] = config[k]
             else:
@@ -76,3 +61,30 @@ def with_config(call=None, path=""):
     from_config.__module__ = call.__module__
     setattr(call, 'from_config', classmethod(from_config))
     return call
+
+
+def with_config_function(f, path):
+    params = get_params(f)
+
+    @wraps(f)
+    def wrapped(config):
+        config = walk_dict(config, path)
+        inputs = dict()
+        for k, default in params.items():
+            if default == inspect._empty:
+                inputs[k] = config[k]
+            else:
+                inputs[k] = config.get(k, default)
+
+        return f(**inputs)
+    return wrapped
+
+
+def with_config(arg, path=""):
+    if isinstance(arg, str):
+        return lambda cb: with_config(cb, arg)
+
+    if isinstance(arg, type):
+        return with_config_class(arg, path)
+
+    return with_config_function(arg, path)
