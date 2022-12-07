@@ -55,6 +55,13 @@
     "file": "utils/with-config.py",
     "name": "utils.with-config"
   },
+  "utils.read": {
+    "short_desc": "unified `read` function, to be updated with formats",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/read.py",
+    "name": "utils.read"
+  },
   "utils.dict": {
     "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
     "description": "No description provided",
