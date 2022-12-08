@@ -104,6 +104,13 @@
     "file": "nn/patcher.py",
     "name": "nn.patcher"
   },
+  "nn.balanced_bce_losses": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/balanced_bce_losses.py",
+    "name": "nn.balanced_bce_losses"
+  },
   "nn.indexed_image_folder": {
     "short_desc": "IndexedImageFolder, image folder with annotation index file",
     "description": "No description provided",
