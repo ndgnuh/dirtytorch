@@ -104,6 +104,13 @@
     "file": "nn/patcher.py",
     "name": "nn.patcher"
   },
+  "nn.indexed_image_folder": {
+    "short_desc": "IndexedImageFolder, image folder with annotation index file",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/indexed_image_folder.py",
+    "name": "nn.indexed_image_folder"
+  },
   "pl.loggers": {
     "short_desc": "pytorch lightning customer loggers",
     "description": "Usage is the same as offical ones\nThis module's main functions are:\n- ConsoleLogger\n- MLFlowLogger (returns MLFlowLogger and set other settings for mlflow)",
