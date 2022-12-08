@@ -69,6 +69,13 @@
     "file": "utils/dict.py",
     "name": "utils.dict"
   },
+  "utils.mask_to_polygon": {
+    "short_desc": "mask to polygon",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/mask_to_polygon.py",
+    "name": "utils.mask_to_polygon"
+  },
   "utils.find": {
     "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
     "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
