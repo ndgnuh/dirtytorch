@@ -1,6 +1,6 @@
 # short_desc: Custom lightning callbacks
 from pytorch_lightning.callbacks import Callback
-from typing import Callable, Any
+from typing import Callable, Any, Dict
 from functools import wraps
 import torch
 
@@ -11,6 +11,7 @@ class MetricWatcher(Callback):
                  mode: str = "max",
                  eq: bool = True,
                  getter: Any = None,
+                 callbacks: Dict = dict(),
                  log_step: bool = False):
         super().__init__()
         assert mode in ["min", "max"]
@@ -22,6 +23,7 @@ class MetricWatcher(Callback):
         self.eq = eq
         self.getter = getter
         self.log_step = log_step
+        self.callbacks = callbacks
 
         if mode == "min":
             self.current_best = torch.inf
@@ -66,8 +68,25 @@ class MetricWatcher(Callback):
         mean_metric = sum(self.metrics) / n
         if self.check_surpass(mean_metric, self.current_best):
             self.current_best = mean_metric
+            for _, callback in self.callbacks.items():
+                callback(self)
         plmodule.log(self.metric_name, mean_metric)
         plmodule.log(self.best_name, self.current_best)
+
+    def register(self, name):
+        def decorator(f):
+            self.callbacks[name] = f
+            return f
+        return decorator
+
+    def __repr__(self):
+        name = self.__class__.__name__
+        args = [
+            f"metric={self.metric}",
+            f"mode={self.mode}",
+        ]
+        args = ', '.join(args)
+        return f"{name}({args})"
 
 
 class GlobalStepLRScheduler(Callback):
@@ -99,47 +118,3 @@ class GlobalStepLRScheduler(Callback):
         for lrs in trainer.lr_scheduler_configs:
             lrs.interval = 'epoch'
             lrs.frequency = 99999999999999999
-
-
-class MetricCallback(Callback):
-    def __init__(self,
-                 metric: str,
-                 mode: str,
-                 callback: Callable,
-                 on: str, model=None):
-        super().__init__()
-        assert mode in ["min", "max"]
-        assert on.startswith("on_") and hasattr(Callback, on)
-
-        # Every hook receive trainer as first argument
-        @wraps(getattr(self, on))
-        def callback_wrapper(trainer, *args, **kwargs):
-            current_metric = trainer.logged_metrics[self.metric]
-            if self.mode == "min":
-                cond = current_metric < self.current_metric
-            elif self.mode == "max":
-                cond = current_metric > self.current_metric
-            if cond:
-                self.current_metric = current_metric
-                self.callback(self, *args, **kwargs)
-
-        setattr(self, on, callback_wrapper)
-        if mode == "min":
-            self.current_metric = torch.inf
-        elif mode == "max":
-            self.current_metric = -torch.inf
-        self.callback = callback
-        self.metric = metric
-        self.mode = mode
-        self.model = model
-        self.on = on
-
-    def __repr__(self):
-        name = self.__class__.__name__
-        args = [
-            f"metric={self.metric}",
-            f"mode={self.mode}",
-            f"on={self.on}",
-        ]
-        args = ', '.join(args)
-        return f"{name}({args})"
