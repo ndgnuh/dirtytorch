@@ -44,8 +44,9 @@ def get_params(call):
 def with_config_class(call, path):
     params = get_params(call)
 
-    def from_config(cls, config):
+    def from_config(cls, config, **extra):
         config = walk_dict(config, path)
+        config.update(extra)
         inputs = dict()
         for k, default in params.items():
             if default == inspect._empty:
@@ -67,8 +68,9 @@ def with_config_function(f, path):
     params = get_params(f)
 
     @wraps(f)
-    def wrapped(config):
+    def wrapped(config, **extra):
         config = walk_dict(config, path)
+        config.update(extra)
         inputs = dict()
         for k, default in params.items():
             if default == inspect._empty:
