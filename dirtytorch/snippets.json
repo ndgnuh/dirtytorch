@@ -83,6 +83,13 @@
     "file": "utils/find.py",
     "name": "utils.find"
   },
+  "utils.polygon": {
+    "short_desc": "calculate offset polygon",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/polygon.py",
+    "name": "utils.polygon"
+  },
   "utils.functable": {
     "short_desc": "Nice Dict[K, Callable] wrapper",
     "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
