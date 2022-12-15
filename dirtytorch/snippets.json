@@ -97,6 +97,13 @@
     "file": "utils/autoname.py",
     "name": "utils.autoname"
   },
+  "minigym.config": {
+    "short_desc": "Utilities for organizing config in a experiment repository",
+    "description": "No description provided",
+    "depends": [],
+    "file": "minigym/config.py",
+    "name": "minigym.config"
+  },
   "nn.reshape": {
     "short_desc": "No short description provided",
     "description": "No description provided",
