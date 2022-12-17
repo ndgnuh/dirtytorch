@@ -29,6 +29,7 @@ default_args = [
     "--network", "host",
     "--user", f"{UID}:{GID}",
     "--gpus", "all",
+    "--ipc", "host",
     "--env", f"DISPLAY={DISPLAY}",
 ]
 
