@@ -82,7 +82,7 @@ class MetricWatcher(Callback):
     def __repr__(self):
         name = self.__class__.__name__
         args = [
-            f"metric={self.metric}",
+            f"metric={self.metric_name}",
             f"mode={self.mode}",
         ]
         args = ', '.join(args)
