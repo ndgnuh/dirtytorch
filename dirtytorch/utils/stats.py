@@ -4,6 +4,20 @@ from typing import Optional, Union, Callable
 from time import perf_counter
 
 
+class Statistic:
+    def __float__(self):
+        return self.summarize()
+
+    def __str__(self):
+        return str(float(self))
+
+    def __repr__(self):
+        return str(self)
+
+    def __add__(self, x):
+        return self.append(x)
+
+
 def add(x, y):
     return x + y
 
@@ -13,7 +27,7 @@ def prod(x, y):
 
 
 @dataclass
-class ReduceStatistic:
+class ReduceStatistic(Statistic):
     mode: Callable = add
     accumulate: Union[float, int, bool] = 0
 
@@ -26,7 +40,7 @@ class ReduceStatistic:
 
 
 @dataclass
-class AverageStatistic:
+class AverageStatistic(Statistic):
     acc: float = 0
     count: int = 0
     mean: Optional[float] = None
@@ -49,7 +63,7 @@ class AverageStatistic:
 
 @dataclass
 class TimerStatistic:
-    stats: Union[AverageStatistic, ReduceStatistic]
+    stats: Statistic
 
     def summarize(self):
         return self.stats.summarize()
