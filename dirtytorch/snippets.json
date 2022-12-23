@@ -62,6 +62,13 @@
     "file": "nn/indexed_image_folder.py",
     "name": "nn.indexed_image_folder"
   },
+  "nn.pickle-dataset": {
+    "short_desc": "dataset with single pickle file, fast and easy to move arround",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/pickle-dataset.py",
+    "name": "nn.pickle-dataset"
+  },
   "nn.reshape": {
     "short_desc": "No short description provided",
     "description": "No description provided",
@@ -166,6 +173,13 @@
     "depends": [],
     "file": "scripts/enterdev.py",
     "name": "scripts.enterdev"
+  },
+  "scripts.splitfile": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "scripts/splitfile.py",
+    "name": "scripts.splitfile"
   },
   "onnx.ctc_classifier": {
     "short_desc": "easy CTCClassifier with onnx runtime",
