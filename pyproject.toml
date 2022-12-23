@@ -20,4 +20,4 @@ packages = [
 [project.scripts]
 dirty="dirtytorch.__main__:main"
 enter-dev="dirtytorch.scripts.enterdev:main"
-split-file="dirtytorch.scripts.split-file:main"
+split-file="dirtytorch.scripts.splitfile:main"
