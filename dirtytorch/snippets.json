@@ -1,31 +1,17 @@
 {
-  "retinaface_utils": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "retinaface_utils.py",
-    "name": "retinaface_utils"
-  },
-  "train_utils": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "train_utils.py",
-    "name": "train_utils"
-  },
-  "tripletstuffs": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "tripletstuffs.py",
-    "name": "tripletstuffs"
-  },
   "video_utils": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
     "file": "video_utils.py",
     "name": "video_utils"
+  },
+  "retinaface_utils": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "retinaface_utils.py",
+    "name": "retinaface_utils"
   },
   "init_this_dir": {
     "short_desc": "No short description provided",
@@ -34,110 +20,19 @@
     "file": "init_this_dir.py",
     "name": "init_this_dir"
   },
-  "scripts.split_image_folder": {
+  "tripletstuffs": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
-    "file": "scripts/split_image_folder.py",
-    "name": "scripts.split_image_folder"
+    "file": "tripletstuffs.py",
+    "name": "tripletstuffs"
   },
-  "scripts.enterdev": {
+  "train_utils": {
     "short_desc": "No short description provided",
     "description": "No description provided",
     "depends": [],
-    "file": "scripts/enterdev.py",
-    "name": "scripts.enterdev"
-  },
-  "utils.with-config": {
-    "short_desc": "@with_config decorator for convoluted model configuration",
-    "description": "Usage:\n@with_config(path='module1')\nclass Module1:\ndef __init__(self, size: int):\n...\n@with_config(path='module2')\nclass Module2:\ndef __init__(self, size: int):\n...\nconfig = read_config(...)\nModule1.from_config(config)\nModule2.from_config(config)",
-    "depends": [],
-    "file": "utils/with-config.py",
-    "name": "utils.with-config"
-  },
-  "utils.read": {
-    "short_desc": "unified `read` function, to be updated with formats",
-    "description": "No description provided",
-    "depends": [],
-    "file": "utils/read.py",
-    "name": "utils.read"
-  },
-  "utils.dict": {
-    "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
-    "description": "No description provided",
-    "depends": [],
-    "file": "utils/dict.py",
-    "name": "utils.dict"
-  },
-  "utils.mask_to_polygon": {
-    "short_desc": "mask to polygon",
-    "description": "No description provided",
-    "depends": [],
-    "file": "utils/mask_to_polygon.py",
-    "name": "utils.mask_to_polygon"
-  },
-  "utils.find": {
-    "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
-    "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
-    "depends": [],
-    "file": "utils/find.py",
-    "name": "utils.find"
-  },
-  "utils.polygon": {
-    "short_desc": "calculate offset polygon",
-    "description": "No description provided",
-    "depends": [],
-    "file": "utils/polygon.py",
-    "name": "utils.polygon"
-  },
-  "utils.functable": {
-    "short_desc": "Nice Dict[K, Callable] wrapper",
-    "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
-    "depends": [],
-    "file": "utils/functable.py",
-    "name": "utils.functable"
-  },
-  "utils.autoname": {
-    "short_desc": "auto name from configuration",
-    "description": "No description provided",
-    "depends": [],
-    "file": "utils/autoname.py",
-    "name": "utils.autoname"
-  },
-  "minigym.config": {
-    "short_desc": "Utilities for organizing config in a experiment repository",
-    "description": "No description provided",
-    "depends": [],
-    "file": "minigym/config.py",
-    "name": "minigym.config"
-  },
-  "nn.reshape": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "nn/reshape.py",
-    "name": "nn.reshape"
-  },
-  "nn.patcher": {
-    "short_desc": "patching pytorch models",
-    "description": "No description provided",
-    "depends": [],
-    "file": "nn/patcher.py",
-    "name": "nn.patcher"
-  },
-  "nn.balanced_bce_losses": {
-    "short_desc": "No short description provided",
-    "description": "No description provided",
-    "depends": [],
-    "file": "nn/balanced_bce_losses.py",
-    "name": "nn.balanced_bce_losses"
-  },
-  "nn.indexed_image_folder": {
-    "short_desc": "IndexedImageFolder, image folder with annotation index file",
-    "description": "No description provided",
-    "depends": [],
-    "file": "nn/indexed_image_folder.py",
-    "name": "nn.indexed_image_folder"
+    "file": "train_utils.py",
+    "name": "train_utils"
   },
   "pl.loggers": {
     "short_desc": "pytorch lightning customer loggers",
@@ -152,6 +47,125 @@
     "depends": [],
     "file": "pl/callbacks.py",
     "name": "pl.callbacks"
+  },
+  "nn.patcher": {
+    "short_desc": "patching pytorch models",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/patcher.py",
+    "name": "nn.patcher"
+  },
+  "nn.indexed_image_folder": {
+    "short_desc": "IndexedImageFolder, image folder with annotation index file",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/indexed_image_folder.py",
+    "name": "nn.indexed_image_folder"
+  },
+  "nn.reshape": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/reshape.py",
+    "name": "nn.reshape"
+  },
+  "nn.balanced_bce_losses": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "nn/balanced_bce_losses.py",
+    "name": "nn.balanced_bce_losses"
+  },
+  "utils.read": {
+    "short_desc": "unified `read` function, to be updated with formats",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/read.py",
+    "name": "utils.read"
+  },
+  "utils.find": {
+    "short_desc": "unix-like find(root, name=\"*\", type, walk, cases)",
+    "description": "usage:\nfind(root, name=\"glob*\", type=(\"d\"|\"f\"), walk=True, cases=True)",
+    "depends": [],
+    "file": "utils/find.py",
+    "name": "utils.find"
+  },
+  "utils.autoname": {
+    "short_desc": "auto name from configuration",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/autoname.py",
+    "name": "utils.autoname"
+  },
+  "utils.polygon": {
+    "short_desc": "calculate offset polygon",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/polygon.py",
+    "name": "utils.polygon"
+  },
+  "utils.dict": {
+    "short_desc": "Helpers for dict's (merge_dict, AttrDict)",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/dict.py",
+    "name": "utils.dict"
+  },
+  "utils.stats": {
+    "short_desc": "helper for calculating score and time, etc...",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/stats.py",
+    "name": "utils.stats"
+  },
+  "utils.tree": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/tree.py",
+    "name": "utils.tree"
+  },
+  "utils.mask_to_polygon": {
+    "short_desc": "mask to polygon",
+    "description": "No description provided",
+    "depends": [],
+    "file": "utils/mask_to_polygon.py",
+    "name": "utils.mask_to_polygon"
+  },
+  "utils.with-config": {
+    "short_desc": "@with_config decorator for convoluted model configuration",
+    "description": "Usage:\n@with_config(path='module1')\nclass Module1:\ndef __init__(self, size: int):\n...\n@with_config(path='module2')\nclass Module2:\ndef __init__(self, size: int):\n...\nconfig = read_config(...)\nModule1.from_config(config)\nModule2.from_config(config)",
+    "depends": [],
+    "file": "utils/with-config.py",
+    "name": "utils.with-config"
+  },
+  "utils.functable": {
+    "short_desc": "Nice Dict[K, Callable] wrapper",
+    "description": "Sample usage:\ndispatch = Functable()\ndispatch.register(\"action1\", action1)\n@dispatch.register(\"action2\")\ndef action2(...):\n...",
+    "depends": [],
+    "file": "utils/functable.py",
+    "name": "utils.functable"
+  },
+  "minigym.config": {
+    "short_desc": "Utilities for organizing config in a experiment repository",
+    "description": "No description provided",
+    "depends": [],
+    "file": "minigym/config.py",
+    "name": "minigym.config"
+  },
+  "scripts.split_image_folder": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "scripts/split_image_folder.py",
+    "name": "scripts.split_image_folder"
+  },
+  "scripts.enterdev": {
+    "short_desc": "No short description provided",
+    "description": "No description provided",
+    "depends": [],
+    "file": "scripts/enterdev.py",
+    "name": "scripts.enterdev"
   },
   "onnx.ctc_classifier": {
     "short_desc": "easy CTCClassifier with onnx runtime",
