@@ -40,6 +40,21 @@ class ReduceStatistic(Statistic):
 
 
 @dataclass
+class MaxStatistic(Statistic):
+    current: float = -1
+
+    def append(self, x):
+        if x > self.current:
+            self.current = x
+            return True
+        else:
+            return False
+
+    def summarize(self):
+        return self.current
+
+
+@dataclass
 class AverageStatistic(Statistic):
     acc: float = 0
     count: int = 0
@@ -48,10 +63,7 @@ class AverageStatistic(Statistic):
     def summarize(self):
         if self.count == 0:
             return self.mean
-        if self.mean is None:
-            self.mean = self.acc / self.count
-        else:
-            self.mean = (self.mean + (self.acc / self.count)) / 2
+        self.mean = self.acc / self.count
         self.acc = 0
         self.count = 0
         return self.mean
