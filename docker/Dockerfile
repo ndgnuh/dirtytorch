@@ -12,7 +12,7 @@ RUN apt-get install -y python-is-python3
 
 # Heavy deps get installed first
 RUN pip install -U pip
-RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip install torch torchvision torchaudio
 
 RUN pip cache purge
 
@@ -36,6 +36,16 @@ WORKDIR /home/dev/
 RUN pip install -U pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt -U
+
+# JUPYTER STUFFS!
+env PATH=/home/dev/.local/bin:$PATH
+RUN echo $PATH
+RUN jupyter contrib nbextension install --user
+RUN python -m jupyter nbextension enable toc2/main
+RUN python -m jupyter nbextension enable code_prettify/autopep8
+RUN python -m jupyter nbextension enable codefolding/main
+RUN python -m jupyter nbextension enable toggle_all_line_numbers/main
+
 RUN pip cache purge
 
 # PATH
