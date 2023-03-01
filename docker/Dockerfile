@@ -41,14 +41,18 @@ RUN pip install -r requirements.txt -U
 env PATH=/home/dev/.local/bin:$PATH
 RUN echo $PATH
 RUN jupyter contrib nbextension install --user
-RUN python -m jupyter nbextension enable toc2/main
-RUN python -m jupyter nbextension enable code_prettify/autopep8
-RUN python -m jupyter nbextension enable codefolding/main
-RUN python -m jupyter nbextension enable toggle_all_line_numbers/main
+RUN jupyter nbextensions_configurator enable --user
+RUN jupyter nbextension enable toc2/main
+RUN jupyter nbextension enable code_prettify/autopep8
+RUN jupyter nbextension enable codefolding/main
+RUN jupyter nbextension enable toggle_all_line_numbers/main
+RUN jupyter nbextension enable hinterland/hinterland
+RUN jupyter nbextension enable init_cell/main
+COPY unsafe-jupyter-notebook /home/dev/.local/bin/
 
 RUN pip cache purge
 
-# PATH
+# SHELL STUFF
 COPY .bashrc /home/dev/
 
 RUN mkdir /home/dev/working
