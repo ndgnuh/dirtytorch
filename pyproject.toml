@@ -19,5 +19,5 @@ packages = [
 
 [project.scripts]
 dirty="dirtytorch.__main__:main"
-enter-dev="dirtytorch.scripts.enter-dev:main"
+enter-dev="dirtytorch.scripts.enterdev_v2:main"
 split-file="dirtytorch.scripts.splitfile:main"
