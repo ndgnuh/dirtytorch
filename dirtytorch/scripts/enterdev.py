@@ -33,6 +33,12 @@ default_args = [
     "--env", f"DISPLAY={DISPLAY}",
 ]
 
+if path.isfile("/etc/timezone"):
+    with open("/etc/timezone") as f:
+        tz = f.read().strip()
+        default_args.append("-e")
+        default_args.append(f'TZ=${tz}')
+
 
 def mount_if_exist(args, filepath, target=None):
     if target is None:
@@ -53,13 +59,19 @@ def enter_dev_new(alt_args):
         cmds = mount_if_exist(cmds, filepath, target)
 
     cmds.append("ndgnuh/torch-dev-env")
+    print(' '.join(cmds))
     exit_code = call(cmds, stderr=PIPE)
 
     # TODO better check
     if exit_code == 125:
-        call(["docker", "exec", "-it", alt_args[-1], "bash"])
+        cmds = ["docker", "exec", "-it"] + alt_args + ["bash"]
+        call(cmds)
 
 
 def main():
     alt_args = sys.argv[1:]
     enter_dev_new(alt_args)
+
+
+if __name__ == "__main__":
+    main()
