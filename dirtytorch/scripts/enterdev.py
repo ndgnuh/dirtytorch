@@ -37,7 +37,7 @@ if path.isfile("/etc/timezone"):
     with open("/etc/timezone") as f:
         tz = f.read().strip()
         default_args.append("-e")
-        default_args.append(f'TZ=${tz}')
+        default_args.append(f'TZ={tz}')
 
 
 def mount_if_exist(args, filepath, target=None):
