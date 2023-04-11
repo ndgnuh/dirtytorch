@@ -79,7 +79,7 @@ def make_new_container(args, extra_args=[]):
     image_name = "ndgnuh/torch-dev-env"
     if args.name is not None:
         options = options + ["--name", args.name]
-    cmds = ["docker", "run", *options, image_name, "bash"]
+    cmds = ["docker", "run", *options, *extra_args, image_name, "bash"]
     if args.debug:
         print(cmds)
     call(cmds)
