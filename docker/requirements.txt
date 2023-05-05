@@ -1,27 +1,44 @@
-onnxruntime-gpu
-thefuzz[speedup]
-pyclean
-jupyter
-notebook==6.4.8
-jupyter-server<=2.0.0
-https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
-jupyter_nbextensions_configurator
-autopep8
-ipywidgets
-tqdm
+#
+# Data packages
+#
+thefuzz
 pandas
 scipy
 numpy
 toolz
 lenses
 opencv-python
-mlflow
 
+#
+# Dev tool packages
+#
+icecream
+pytest
+pyclean
+autopep8
+tqdm
+
+#
+# Jupyter notebook
+#
+jupyter
+notebook
+jupyter-server
+https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
+jupyterthemes
+jupyter_nbextensions_configurator
+ipywidgets
+
+#
 # Torch packages
+#
 torchtext
+torchvision
 torch-summary
-pytorch_lightning
+lightning
 torchmetrics
 
+#
 # Battery included
+#
 dirtytorch@git+https://github.com/ndgnuh/dirtytorch.git

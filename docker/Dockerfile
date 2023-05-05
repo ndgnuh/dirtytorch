@@ -1,61 +1,81 @@
-# FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
-FROM python:3.9-slim-bullseye
+FROM python:3.11-slim-bullseye
 
-# ENV
-ENV TERM=xterm-256color
+#
+# OS extra packages
+#
+RUN <<EOR
+	apt-get update
+	# for video /image stuffs
+	apt-get install -y ffmpeg python3-opencv v4l2loopback-dkms
+	# system utilities
+	apt-get install -y htop tree curl wget git neovim entr
+	# clean up
+	apt-get clean
+EOR
 
-# Install python
-RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get install -y python3 python3-pip
-RUN apt-get install -y python-is-python3
-
-# Heavy deps get installed first
+#
+# Install torch first because it's heavy
+#
 RUN pip install -U pip
 RUN pip install torch torchvision torchaudio
 
-RUN pip cache purge
-
-# Extra packages
-RUN apt-get install -y sudo ffmpeg python3-opencv
-RUN apt-get install -y thunar v4l2loopback-dkms vlc file
-RUN apt-get install -y neovim tmux htop tree build-essential
-RUN apt-get install -y git feh
-RUN apt-get install -y curl wget aria2
-
-# Create user
+#
+# Create user 1000 because it's normally the default
+# Root user get a password if installing extra package is needed
+#
 RUN useradd -u 1000 -m dev
+RUN usermod -a dev -G video # Needed to access raw webcam
 RUN echo "dev:1234" | chpasswd
-RUN usermod -a dev -G sudo
-RUN usermod -a dev -G video # For camera
-USER dev
-WORKDIR /home/dev/
+RUN echo "root:1234" | chpasswd
 
-# Install deps
-# Heavy deps get installed first
-RUN pip install -U pip
-COPY requirements.txt .
-RUN pip install -r requirements.txt -U
+#
+# Install other packages
+#
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -U -r /tmp/requirements.txt
+RUN rm /tmp/requirements.txt
 
-# JUPYTER STUFFS!
-env PATH=/home/dev/.local/bin:$PATH
-RUN echo $PATH
-RUN jupyter contrib nbextension install --user
-RUN jupyter nbextensions_configurator enable --user
+#
+# Setup jupyter notebook
+# Do not use hinterland because that shit is buggy
+# Do not use code folding because it breaks the line number when using theme
+#
+RUN jupyter contrib nbextension install
+RUN jupyter nbextensions_configurator enable
 RUN jupyter nbextension enable toc2/main
 RUN jupyter nbextension enable code_prettify/autopep8
-RUN jupyter nbextension enable codefolding/main
 RUN jupyter nbextension enable toggle_all_line_numbers/main
-RUN jupyter nbextension enable hinterland/hinterland
 RUN jupyter nbextension enable init_cell/main
-COPY unsafe-jupyter-notebook /home/dev/.local/bin/
+RUN jt -t onedork -fs 11 --cellw 90%  -lineh 130
 
+#
+# Setup shell stuffs
+# use /etc/profile because user might not be 1000
+# - local path
+# - aliases
+# - change bash ctrl-w mapping to rubout path
+# - set term to xterm-256color for colors
+# 
+COPY extra.bashrc /tmp/extra.bashrc
+RUN cat /tmp/extra.bashrc | tee -a /etc/bash.bashrc
+RUN rm /tmp/extra.bashrc
+ENV TERM=xterm-256color
+
+#
+# Clean up apt cache and pip cache
+#
 RUN pip cache purge
+RUN apt-get clean
+RUN rm /var/lib/apt/lists/ -rf
 
-# SHELL STUFF
-COPY .bashrc /home/dev/
-
+#
+# Move to the normal user and a normal working directory
+#
+USER dev
 RUN mkdir /home/dev/working
 WORKDIR /home/dev/working
 
-CMD ["bash"]
+#
+# Environment and entrypoint
+#
+ENTRYPOINT "/bin/bash"
