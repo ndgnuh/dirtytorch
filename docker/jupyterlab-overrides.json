@@ -1,0 +1,55 @@
+{
+	"@jupyterlab/toc-extension:registry": {
+		"maximalDepth": 4,
+		"numberingH1": true,
+		"numberHeaders": true,
+		"includeOutput": true,
+		"syncCollapseState": false
+	},
+	"@jupyterlab/apputils-extension:themes": {
+		"theme": "JupyterLab Dark",
+		"theme-scrollbars": true,
+		"overrides": {
+			"code-font-family": "monospace",
+			"code-font-size": "15px",
+			"content-font-family": "sans",
+			"content-font-size1": "15px",
+			"ui-font-family": "sans",
+			"ui-font-size1": "13px"
+		}
+	},
+	"@jupyterlab/notebook-extension:tracker": {
+		"defaultCell": "code",
+		"autoStartDefaultKernel": true,
+		"inputHistoryScope": "global",
+		"kernelShutdown": false,
+		"scrollPastEnd": true,
+		"recordTiming": true,
+		"overscanCount": 1,
+		"maxNumberOutputs": 50,
+		"showEditorForReadOnlyMarkdown": true,
+		"kernelStatus": {
+			"showOnStatusBar": false,
+			"showProgress": true
+		},
+		"documentWideUndoRedo": false,
+		"showHiddenCellsButton": true,
+		"renderingLayout": "default",
+		"sideBySideLeftMarginOverride": "10px",
+		"sideBySideRightMarginOverride": "10px",
+		"sideBySideOutputRatio": 1,
+		"windowingMode": "defer",
+		"codeCellConfig": {
+			"lineNumbers": true,
+			"codeFolding": true
+		},
+		"markdownCellConfig": {
+			"lineNumbers": true,
+			"matchBrackets": true
+		},
+		"rawCellConfig": {
+			"lineNumbers": true,
+			"matchBrackets": false
+		}
+	}
+}

@@ -40,13 +40,16 @@ RUN rm /tmp/requirements.txt
 # Do not use hinterland because that shit is buggy
 # Do not use code folding because it breaks the line number when using theme
 #
-RUN jupyter contrib nbextension install
-RUN jupyter nbextensions_configurator enable
-RUN jupyter nbextension enable toc2/main
-RUN jupyter nbextension enable code_prettify/autopep8
-RUN jupyter nbextension enable toggle_all_line_numbers/main
-RUN jupyter nbextension enable init_cell/main
-RUN jt -t onedork -fs 11 --cellw 90%  -lineh 130
+# RUN jupyter contrib nbextension install
+# RUN jupyter nbextensions_configurator enable
+# RUN jupyter nbextension enable toc2/main
+# RUN jupyter nbextension enable code_prettify/autopep8
+# RUN jupyter nbextension enable toggle_all_line_numbers/main
+# RUN jupyter nbextension enable init_cell/main
+# RUN jt -t onedork -fs 11 --cellw 90%  -lineh 130
+# https://stackoverflow.com/questions/48950670/jupyterlab-user-settings-file",
+RUN mkdir /usr/local/share/jupyter/lab/settings/ -p
+COPY jupyterlab-overrides.json /usr/local/share/jupyter/lab/settings/overrides.json
 
 #
 # Setup shell stuffs

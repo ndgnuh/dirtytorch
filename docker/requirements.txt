@@ -22,12 +22,11 @@ tqdm
 # Jupyter notebook
 #
 jupyter
-notebook
-jupyter-server
-https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
-jupyterthemes
-jupyter_nbextensions_configurator
-ipywidgets
+notebook==7.0.0b2
+# https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
+# jupyterthemes
+# jupyter_nbextensions_configurator
+# ipywidgets
 
 #
 # Torch packages
