@@ -17,4 +17,3 @@ alias unsafe-jupyter-notebook='jnote'
 #
 stty werase undef
 bind "\C-w:unix-filename-rubout"
-
